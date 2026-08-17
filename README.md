@@ -1,2 +1,2 @@
-# zak_astro.github.io
+# zak_astro
 La Bio Officiel de Zak AstrPhoto
