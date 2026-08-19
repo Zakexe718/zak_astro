@@ -217,6 +217,16 @@
             margin-bottom: 8px;
         }
 
+        .log-item{
+            display: flex;
+            gap: 10px;
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: var(--star);
+            padding: 6px 0;
+            border-top: 1px dashed var(--panel-border);
+        }
+
         .log-item a {
             display: flex;
             gap: 10px;
@@ -251,6 +261,12 @@
         }
 
         .log-item:first-of-type{ border-top: none; }
+        .log-item a:first-of-type{ border-top: none; }
+
+        .log-item a:first-of-type:hover{
+            color: var(--star-dim);
+        }
+
         .log-item::before{
             content: '·';
             color: var(--ha);
