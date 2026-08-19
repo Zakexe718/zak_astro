@@ -1,0 +1,279 @@
+:root{
+            --void: #070a12;
+            --void-2: #0c1120;
+            --star: #eef1f7;
+            --star-dim: #8b93a8;
+            --ha: #c1453c;       /* hydrogen-alpha red, narrowband imaging */
+            --oiii: #3fa89b;      /* oxygen-III teal, narrowband imaging */
+            --panel-border: rgba(238,241,247,0.09);
+        }
+
+        *{ margin:0; padding:0; box-sizing:border-box; }
+
+        html,body{
+            background: var(--void);
+            color: var(--star);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @media (prefers-reduced-motion: reduce){
+            *{ animation: none !important; transition: none !important; }
+        }
+
+        /* ---------- background field ---------- */
+        #stars{
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            display:block;
+        }
+
+        .nebula{
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.16;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .nebula.ha{
+            width: 480px; height: 480px;
+            top: -140px; left: -160px;
+            background: radial-gradient(circle, var(--ha), transparent 70%);
+        }
+        .nebula.oiii{
+            width: 420px; height: 420px;
+            bottom: -160px; right: -140px;
+            background: radial-gradient(circle, var(--oiii), transparent 70%);
+        }
+
+        /* ---------- layout ---------- */
+        .page{
+            position: relative;
+            z-index: 1;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 64px 24px 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ---------- header ---------- */
+        .scope-mark{
+            width: 64px; height: 64px;
+            margin-bottom: 22px;
+            color: var(--star);
+            opacity: 0.92;
+        }
+
+        .name{
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 27px;
+            letter-spacing: 0.01em;
+            text-align: center;
+        }
+
+        .tagline{
+            margin-top: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+            letter-spacing: 0.04em;
+            color: var(--star-dim);
+            text-align: center;
+        }
+
+        .tagline .dot{ color: var(--oiii); }
+
+        /* ---------- constellation connector ---------- */
+        .chart{
+            width: 100%;
+            margin-top: 30px;
+            position: relative;
+        }
+        .chart svg{ width:100%; height:100%; overflow: visible; }
+        .chart-line{
+            fill: none;
+            stroke: var(--panel-border);
+            stroke-width: 1;
+            stroke-dasharray: 3 5;
+        }
+        .chart-node{
+            fill: var(--star-dim);
+            opacity: 0.6;
+        }
+
+        /* ---------- link cards ---------- */
+        .links{
+            width: 100%;
+            display: flex;
+            gap: 14px;
+            margin-top: 10px;
+        }
+
+        .link-card{
+            flex: 1;
+            position: relative;
+            background: linear-gradient(180deg, var(--void-2), rgba(12,17,32,0.4));
+            border: 1px solid var(--panel-border);
+            border-radius: 14px;
+            padding: 20px 16px 18px;
+            text-decoration: none;
+            color: var(--star);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+        .link-card:hover{
+            border-color: rgba(238,241,247,0.22);
+            transform: translateY(-2px);
+        }
+        .link-card:focus-visible{
+            outline: 2px solid var(--oiii);
+            outline-offset: 2px;
+        }
+
+        .link-icon{
+            width: 22px; height: 22px;
+        }
+        .link-icon.ig{ color: var(--star); }
+        .link-icon.yt{ color: var(--star); }
+
+        .link-name{
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 14.5px;
+        }
+        .link-domain{
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--star-dim);
+            margin-top: 2px;
+        }
+
+        .coord{
+            position: absolute;
+            top: 10px; right: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            color: var(--star-dim);
+            opacity: 0.55;
+            letter-spacing: 0.02em;
+        }
+
+        /* ---------- equipment / observation log ---------- */
+        .log{
+            width: 100%;
+            margin-top: 34px;
+            background: var(--void-2);
+            border: 1px solid var(--panel-border);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .log-head{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--panel-border);
+        }
+        .log-head-title{
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--star-dim);
+        }
+        .log-head-status{
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--oiii);
+            box-shadow: 0 0 8px var(--oiii);
+        }
+
+        .log-body{ padding: 18px 18px 6px; }
+
+        .log-section{ margin-bottom: 18px; }
+        .log-label{
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10.5px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--oiii);
+            margin-bottom: 8px;
+        }
+
+        .log-item{
+            display: flex;
+            gap: 10px;
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: var(--star);
+            padding: 6px 0;
+            border-top: 1px dashed var(--panel-border);
+        }
+
+        .log-item a {
+            display: flex;
+            gap: 10px;
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: var(--star);
+            text-decoration: none;
+            padding: 6px 0;
+            border-top: 1px dashed var(--panel-border);
+        }
+
+        .log-item a:hover {
+            display: flex;
+            gap: 10px;
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: var(--star-dim);
+            text-decoration: none;
+            padding: 6px 0;
+            border-top: 1px dashed var(--panel-border);
+        }
+
+        .log-item a:visited {
+            display: flex;
+            gap: 10px;
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: var(--star);
+            text-decoration: none;
+            padding: 6px 0;
+            border-top: 1px dashed var(--panel-border);
+        }
+
+        .log-item:first-of-type{ border-top: none; }
+        .log-item a:first-of-type{ border-top: none; }
+
+        .log-item a:first-of-type:hover{
+            color: var(--star-dim);
+        }
+
+        .log-item::before{
+            content: '·';
+            color: var(--ha);
+            font-weight: 700;
+        }
+
+        /* ---------- footer ---------- */
+        .footer{
+            margin-top: 34px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10.5px;
+            color: var(--star-dim);
+            opacity: 0.5;
+            text-align: center;
+        }
+
+        @media (max-width: 380px){
+            .links{ flex-direction: column; }
+        }
